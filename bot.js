@@ -3,17 +3,16 @@ const client = new Discord.Client();
 const config = require("./config.json");
 const discloud = require('discloud-status');
 
-client.login(config.token)
 client.on('ready', () => {
   console.log('Estou pronto para ser Usado!');
-  client.user.setActivity('p!help')
+  client.user.setActivity('Use: p!help')
 });
 const newLocal = client.on("message", message => {
     if (!message.content.startsWith(config.prefix) || message.author.bot) return;
     
     const args = message.content.slice(config.prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
-    if(command === "ajuda")
+    if(command === "ajuda", "help")
     {
         let ajuda = new Discord.MessageEmbed()
         .setColor(`RANDOM`)
@@ -23,19 +22,21 @@ const newLocal = client.on("message", message => {
         message.channel.send(ajuda)
         return 1;
     }
-    if(command == "clear")
+    if(command == "clear", "limpar")
     {
-      const args = message.content.split(' ').slice(1);
-      const amount = args.join(' ');
-      if (!amount) return message.reply ('Você não informou uma quantidade de mensagens que deveria ser deletada!');
-      if (isNaN (amount)) return message.reply ('O parâmetro de quantidade não é um número!');
+      if(!message.member.permissions.has('MANAGE_MESSAGES')) return message.reply('Você precisa ter permissão de gerenciar messagens para usar este comando!');
 
-      if(amount > 100) return message.reply ('Você não pode deletar mais de 100 mensagens de uma vez!'); 
-      if(amount < 1) return message.reply ('Você tem que deletar pelo menos 1 mensagem!'); 
-      message.channel.messages.fetch({limit: amount}). then (messages => {
-      message.channel.bulkDelete (messages)});
-      message.channel.send('Chat limpo!')
-    return 1;
+        const args = message.content.split(' ').slice(1);
+        const amount = args.join(' ');
+        if (!amount) return message.reply ('Você não informou uma quantidade de mensagens que deveria ser deletada!');
+        if (isNaN (amount)) return message.reply ('O parâmetro de quantidade não é um número!');
+
+        if(amount > 100) return message.reply ('Você não pode deletar mais de 100 mensagens de uma vez!'); 
+        if(amount < 1) return message.reply ('Você tem que deletar pelo menos 1 mensagem!'); 
+        message.channel.messages.fetch({limit: amount}). then (messages => {
+        message.channel.bulkDelete (messages)});
+        message.channel.send('Chat limpo!')
+      return 1;
     }
     if(command == "ping")
     {
