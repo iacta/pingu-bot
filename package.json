@@ -1,8 +1,8 @@
 {
-  "name": "radio-bgl",
+  "name": "pingu-bot",
   "version": "1.0.0",
   "description": "",
-  "main": "musicbot.js",
+  "main": "bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,9 +13,11 @@
     "discord.js": "^12.2.0",
     "ffbinaries": "^1.1.4",
     "ffmpeg": "0.0.4",
+    "ffmpeg-static": "^4.2.7",
     "http": "0.0.1-security",
     "lodash": "^4.17.20",
     "node-internet-radio": "^0.2.0",
+    "opus": "0.0.0",
     "opusscript": "0.0.7",
     "voice": "0.0.0",
     "ytdl-core": "^3.2.1"
